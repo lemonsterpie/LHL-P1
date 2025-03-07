@@ -1,8 +1,8 @@
-## What issues will you address by cleaning the data?
+### What issues will you address by cleaning the data?
 
-The all_sessions table was the focus of my data cleaning as most of my query and analysis was done using that table. The main issues I addressed in cleaning were the numerous amounts of columns, as well as rows that have either null values or a string indicating not available or not set. Additionally, I also divided the product price and total transaction revenue by 1,000,000 for easier readibility. 
+The `all_sessions` table was the focus of my data cleaning as most of my query and analysis was done using that table. The main issues I addressed in cleaning were the numerous amounts of columns, as well as rows that have either null values or a string indicating not available or not set. Additionally, I also divided the product price and total transaction revenue by 1,000,000 for easier readibility. Cleaning the `products` table involved dropping the columns unecessary for my analysis. 
 
-## Queries: Below, provide the SQL queries you used to clean your data.
+### Queries: Below, provide the SQL queries you used to clean your data.
 ```
 -- Deleting columns:
 ALTER TABLE    all_sessions 
@@ -19,7 +19,13 @@ DROP COLUMN    ecommerce_action_option,
 DROP COLUMN    transaction_id,
 DROP COLUMN    search_keyword
 ```
-I chose to clean my data by creating a temporary view on which my question queries refer to. This prevented the frustration of accidentally deleting required data in the table and going through the hassle of importing it again.
+```
+ALTER TABLE 	products 
+DROP COLUMN 	restocking_lead_time, 
+DROP COLUMN	sentiment_score, 
+DROP COLUMN 	sentiment_magnitude
+```
+I chose to clean my data by creating a temporary view on which my question queries refer to. This prevented the frustration of accidentally deleting required data in the table and going through the hassle of importing it in again.
 ```
 CREATE VIEW cleaned_sessions AS 
 	WITH non_null_sessions AS (
