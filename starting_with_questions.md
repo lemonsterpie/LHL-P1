@@ -18,13 +18,11 @@ WITH grouped_total_revenue AS (
 SELECT 
 	*
 FROM		grouped_total_revenue
-WHERE 		total_transaction_revenue IS NOT NULL
 ORDER BY 	total_transaction_revenue DESC
+LIMIT 		10
 ```
-
-Answer:                                                                                                                                                                                                                                                
-The top 5 cities with the most total transaction revenue are `San Francisco`, `Sunnyvale`, `Atlanta`, `Palo Alto`, and `Tel Aviv-Yafo`, respectively. It is evident that American cities are prominent in the most profitable cities. Of the 10 cities with the most total revenue, only `Tel Aviv-Yafo` and `Sydney` are not located in the US. Excluding American cities from the results, the other three cities that have total transaction revenues are `Toronto`, CNY?, `Zurich`, and `Chuo`, 
 ```
+-- excluding the US:
 WITH grouped_total_revenue AS (
 	SELECT 
 		country, 
@@ -37,14 +35,16 @@ WITH grouped_total_revenue AS (
 SELECT 
 	*
 FROM		grouped_total_revenue
-WHERE 		total_transaction_revenue IS NOT NULL AND country NOT LIKE  '%United States%'
+WHERE 		country NOT LIKE  '%United States%'
 ORDER BY 	total_transaction_revenue DESC
 LIMIT 		10
 ```
+Answer:                                                                                                                                                                                                                       
+
+The top 5 cities with the most total transaction revenue are `San Francisco`, `Sunnyvale`, `Atlanta`, `Palo Alto`, and `Tel Aviv-Yafo`, respectively. It is evident that American cities are prominent in the most profitable cities. Of the 10 cities with the most total revenue, only `Tel Aviv-Yafo` and `Sydney` are not located in the US. Excluding American cities from the results, the other three cities that have total transaction revenues are `Toronto`, CNY?, `Zurich`, and `Chuo`, 
 
 
-**Question 2: What is the average number of products ordered from visitors in each city and country?**
-
+**Question 2: What is the average number of products ordered from visitors in each city and country?**	
 
 SQL Queries:
 ```
@@ -57,7 +57,8 @@ GROUP BY 	1, 2
 ORDER BY 	avg_product_ordered DESC
 ```
 
-Answer:                                                                                                                                                                                                                                                             
+Answer:                                                                                                                                                                                                                            
+
 Grouping by country and city and looking at the average of product quantity for each group, `Madrid` stands out as the city with the most products ordered on average, double the amount of the second ranking city `Detroit`.  
 
 
@@ -70,13 +71,23 @@ SQL Queries:
 SELECT 
 	country, 
 	city,
-	COUNT(DISTINCT(product_category)) AS category_count
+	COUNT(DISTINCT product_category) AS category_count
 FROM 		cleaned_sessions
 GROUP BY 	country, city
 ORDER BY 	category_count DESC 
 ```
+```
+SELECT 
+	country, 
+	city,
+	product_category,
+	COUNT(product_category) AS category_count
+FROM 		cleaned_sessions
+GROUP BY 	country, city, product_category
+ORDER BY 	category_count DESC
+```
+Answer:                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
-Answer:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 Looking at the count of product categories, the US ordered the most variety of categories. The cities with the higher category counts are also among the cities with the highest total revenues. 
 
 
@@ -103,13 +114,12 @@ SELECT
 	total_revenue
 FROM		ranked_total_revenues
 WHERE 		revenue_rank = 1 
-ORDER BY 	total_revenue DESC 
+ORDER BY 	total_revenue DESC  
 ```
 
 Answer:                                                                                                                                                                                                                                                
 
-Using the query to look at the products with the greatest total transaction revenues, a noteworthy pattern is that the majority of top revenue cities have are in the US, and they have security products ssuch as cameras and alarms as their leading most profitable product. 
-
+The most profitable product are reusable shopping bags in Atlanta and SPF lip balm in Sunnyvale. Aside from these two top products, a noteworthy pattern is that many top products are security related, such as alarms and security cameras.
 
 
 
@@ -138,7 +148,7 @@ CREATE VIEW top_products AS
 		total_revenue
 	FROM		ranked_total_revenues
 	WHERE 		revenue_rank = 1 AND total_revenue != 0 
-	ORDER BY 	total_revenue DESC 
+	ORDER BY 	total_revenue DESC  
 ```
 
 ```
@@ -157,7 +167,9 @@ ORDER BY 	total_revenue DESC
 
 
 Answer:
-                                                                                                                                                                                                                            Having determined the most profitable cities as well as their most profitable product, the impact of revenue can be reflected in the stock level of the product. The more profitable a product, the higher the stock level, while lower profit products had lower stock levels.                           
+
+																											    
+Having determined the most profitable cities as well as their most profitable product, the impact of revenue can be reflected in the stock level of the product. The more profitable a product, the higher the stock level, while lower profit products had lower stock levels.                           
     
 
 
