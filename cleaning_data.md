@@ -18,9 +18,6 @@ DROP COLUMN    ecommerce_action_step,
 DROP COLUMN    ecommerce_action_option,
 DROP COLUMN    transaction_id,
 DROP COLUMN    search_keyword
-```
-```
-ALTER TABLE 	products 
 DROP COLUMN 	restocking_lead_time, 
 DROP COLUMN	sentiment_score, 
 DROP COLUMN 	sentiment_magnitude
@@ -62,6 +59,6 @@ The result is a view that has significantly less columns, NULL values replaced b
 ```
 SELECT 
 	* 
-FROM 	all_sessions
+FROM 	cleaned_sessions
 LIMIT 	10
 ```
