@@ -1,4 +1,4 @@
-# Final-Project-Transforming-and-Analyzing-Data-with-SQL
+# Final-Project: Transforming and Analyzing Data with SQL
 
 ## Project/Goals
 This project involved analyzing the ecommerce database for trends and patterns. The goal is to find any factors that correlate with transaction revenue, offering insights on future ways of optimization to maximize transaction revenue. 
