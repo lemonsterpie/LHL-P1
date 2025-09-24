@@ -1,4 +1,4 @@
-# Final-Project: Transforming and Analyzing Data with SQL
+# Transforming and Analyzing Data with SQL
 
 ## Project/Goals
 This project involved analyzing the ecommerce database for trends and patterns. The goal is to find any factors that correlate with transaction revenue, offering insights on future ways of optimization to maximize transaction revenue. 
@@ -17,4 +17,5 @@ The majority of the challenges I faced was with cleaning the data. There were ma
 
 ## Future Goals
 If I had more time I would do a deeper cleaning of the product category column for a closer analysis. Specifically, I noticed that each product often had several categories in the string, often with a lot of redundancy. For example, so many categories start in the Home category, and there is a lot of overlap for Apparel, Office, as well as seperation by sex (men vs. women). As such, I think it would be productive for future analysis if the product category column was isolated to a single, more specific string.
+
 
